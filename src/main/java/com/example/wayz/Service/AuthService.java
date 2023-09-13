@@ -53,7 +53,8 @@ public class AuthService {
         driver.setUser(user);
         driver.setStatus("pending");
         driver.setName(driverDTO.getName());
-        driver.setUnCashedTrips(0);
+        driver.setTrips(0);
+        driver.setBalance(0);
         driver.setAvailability("free");
 
 

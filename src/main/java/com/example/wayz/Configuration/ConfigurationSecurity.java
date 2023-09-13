@@ -59,6 +59,9 @@ public class ConfigurationSecurity {
                 .requestMatchers("/api/v1/student-trips/get-all").hasAuthority("ADMIN")
                 .requestMatchers("/api/v1/student-trips/**").hasAnyAuthority("STUDENT", "ADMIN")
                 .requestMatchers("/api/v1/user-trips/complete/{userTripId}").hasAuthority("DRIVER")
+                .requestMatchers(HttpMethod.POST, "/api/v1/user-trips/cashOut").hasAuthority("DRIVER")
+
+
                 .requestMatchers("/api/v1/user-trips/**").hasAuthority("ADMIN")
 
 

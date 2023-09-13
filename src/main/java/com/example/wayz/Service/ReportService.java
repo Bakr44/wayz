@@ -92,8 +92,9 @@ public class ReportService {
         }
         report.setStatus("approved");
         reportRepository.save(report);
-        if (reportRepository.countApproved(driver1.getId()) == 3) {
-            driver1.setStatus("fired");
+
+        if (reportRepository.countApproved(driver1.getId()) >= 3) {
+            driver1.setStatus("closed");
             driverRepository.save(driver1);
         }
     }

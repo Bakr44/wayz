@@ -388,5 +388,28 @@ public class UserTripsService {
         return "user trip with id: " + userTripId + " have been completed.";
     }
 
+    public void cashOut(Integer id){
+        List<UserTrips> allCompleted = userTripsRepository.findAllCompleted(id);
+        Integer tripsApprove =userTripsRepository.countTrips(id);
+        Integer tripsCount = userTripsRepository.countTrips(id);
+        if (allCompleted.isEmpty()){
+            throw new ApiException("you do not have any Completed trips");
+        }
+        Driver driver = driverRepository.findDriverById(id);
+        if (driver.getUser().getRole()=="DRIVER"){
+            throw new ApiException("you are not allowed to do that , you most be driver");
+        }
+        for(int i=0;i<allCompleted.size();i++) {
+            allCompleted.get(i).setStatus("paid");
+            driver.setBalance(tripsCount + 8);
+            userTripsRepository.save(allCompleted.get(i));
+
+        }
+        if (tripsApprove != 0) {
+            driver.setTrips(driver.getTrips()+tripsApprove);
+            driverRepository.save(driver);
+        }
+    }
+
 
 }

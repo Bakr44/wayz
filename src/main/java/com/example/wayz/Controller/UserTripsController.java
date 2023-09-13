@@ -1,6 +1,7 @@
 package com.example.wayz.Controller;
 
 
+import com.example.wayz.Api.ApiResponse.ApiResponse;
 import com.example.wayz.Model.User;
 import com.example.wayz.Model.UserTrips;
 import com.example.wayz.Service.UserTripsService;
@@ -35,4 +36,13 @@ public class UserTripsController {
     public ResponseEntity<String> switchAsComplete(@PathVariable("userTripId") Integer userTripId, @AuthenticationPrincipal User user) {
         return ResponseEntity.ok(userTripsService.switchStatusToComplete(user, userTripId));
     }
+
+
+    @PostMapping("/cashOut")
+    public ResponseEntity cashOut(@AuthenticationPrincipal User user) {
+        userTripsService.cashOut(user.getId());
+        return ResponseEntity.status(200).body(new ApiResponse("te money is added to your balance"));
+    }
+
+
 }

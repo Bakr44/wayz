@@ -34,7 +34,10 @@ public class Driver {
 
 
     @Column(columnDefinition = "int not null default 0")
-    private Integer unCashedTrips;
+    private Integer trips;
+
+    @Column(columnDefinition = "int not null default 0")
+    private Integer balance;
 
 
     @OneToOne
